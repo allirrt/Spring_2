@@ -7,40 +7,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--пишем ссылку на файл, где ранее прописати значения для переменных-->
-    <context:property-placeholder location="classpath:musicplayer.properties"/>
-    <!--создаем бины для заполнения листа-->
-    <bean id="musicBeanClassical" class="com.irrt.spring2.ClassicalMusic"/>
-    <bean id="musicBeanRock" class="com.irrt.spring2.RockMusic"/>
-    <bean id="musicBeanPop" class="com.irrt.spring2.PopMusic"/>
-    <!--создаем лист и заполняем его бинами-->
-    <bean id="musicBean" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="musicBeanClassical" />
-                <ref bean="musicBeanRock" />
-                <ref bean="musicBeanPop" />
-            </list>
-        </constructor-arg>
-    </bean>
-    <!--создаем бин musicPlayer и передаем ему бин листа-->
-    <!--меняем singletone на prototype()-->
-    <bean id="musicPlayer" class="com.irrt.spring2.MusicPlayer" 
-    init-method="doMyInit"
-    destroy-method="doMyDestroy">
-
-
-
-        <property name="musicList" ref="musicBean"/>
-       <!-- создание бина с помощью котструктора
-        <constructor-arg ref="musicBean"/>
-         ниже, создание бина с поиощю сеттера
-
-        <property name="name" value="классика"/>
-        <property name="volume" value="50"/>
-        ниже, создание бина с поиощю сеттера и значениями из файла-->
-       <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-
-    </bean>
+    <!--создаем компонент для работы с аннатациями-->
+  <context:component-scan base-package="com.irrt.spring2"/>
 </beans>

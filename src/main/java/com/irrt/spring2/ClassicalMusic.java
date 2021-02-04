@@ -1,5 +1,8 @@
 package com.irrt.spring2;
 
+import org.springframework.stereotype.Component;
+
+//@Component("classical")
 public class ClassicalMusic implements Music
 {
    //создаем фабричный метод

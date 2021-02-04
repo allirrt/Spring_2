@@ -1,11 +1,14 @@
 package com.irrt.spring2;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+@Component
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
+    private Music music;
     private String name;
     private int volume;
 
@@ -32,34 +35,22 @@ public class MusicPlayer {
 
     public MusicPlayer() {
     }
-
-    public MusicPlayer(List<Music> musicList) {
-        this.musicList = musicList;
+@Autowired
+    public MusicPlayer(Music music) {
+        this.music = music;
     }
 
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
 
     public void playMusic() {
-        for (Iterator<Music> iterator = musicList.iterator(); iterator.hasNext(); ) {
-            Music next = iterator.next();
-            System.out.println("Играет музыка: " + next.getSong());
+        System.out.println("Играет музыка: " + music.getSong());
         }
-    }
-    public void doMyInit(){
-        System.out.println("Делаю инициализацию");
-    }
-    public void doMyDestroy(){
-        System.out.println("Делаю уничтожение бина");
-    }
+//
+//    public void doMyInit(){
+//        System.out.println("Делаю инициализацию");
+//    }
+//    public void doMyDestroy(){
+//        System.out.println("Делаю уничтожение бина");
+//    }
 
-    @Override
-    public String toString() {
-        return "MusicPlayer{" +
-                "musicList=" + musicList +
-                ", name='" + name + '\'' +
-                ", volume=" + volume +
-                '}';
-    }
+
 }
