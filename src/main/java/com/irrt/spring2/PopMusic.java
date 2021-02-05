@@ -2,10 +2,20 @@ package com.irrt.spring2;
 
 import org.springframework.stereotype.Component;
 
-//@Component("pop")
-public class PopMusic implements Music{
+import java.util.Random;
+
+@Component("pop")
+public class PopMusic implements Music {
+
+
     @Override
     public String getSong() {
-        return "Madonna";
+        String[] playList = {"Миллион алых роз ", "Любовь была одна", "Весна пришла"};
+        Random random = new Random();
+        int st = random.nextInt(playList.length);
+        String randElement = playList[st];
+
+
+        return randElement;
     }
 }

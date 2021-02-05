@@ -2,10 +2,6 @@ package com.irrt.spring2;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 public class MainTest {
 
     public static void main(String[] args) {
@@ -27,11 +23,16 @@ public class MainTest {
 //        }
 
 
-     //   MusicPlayer musicPlayer = new MusicPlayer(music);
+        //   MusicPlayer musicPlayer = new MusicPlayer(music);
 
-MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-musicPlayer.playMusic();
+//MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
+        //    musicPlayer.playMusic();
+        Computer computer = context.getBean("computer", Computer.class);
+        System.out.println(computer);
+
+        MusicPlayer musicPlayer = context.getBean("musicPlayer",MusicPlayer.class);
+        System.out.println(musicPlayer.getName() + ", " + musicPlayer.getVolume());
         context.close();
 
 
