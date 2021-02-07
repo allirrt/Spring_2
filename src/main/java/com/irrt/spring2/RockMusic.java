@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-@Component("rock")
+@Component
 public class RockMusic implements Music {
 
     @Override

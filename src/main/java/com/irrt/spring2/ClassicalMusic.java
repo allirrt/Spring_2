@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-@Component("classical")
+@Component
 @Scope("singleton")
 //@Scope("prototype")/будут создаваться разные объекты пр инициализции бина
 public class ClassicalMusic implements Music {

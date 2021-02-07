@@ -1,59 +1,56 @@
 package com.irrt.spring2;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 
 @Component
 public class MusicPlayer {
-    @Value("${musicPlayer.name}")
+  @Value("${musicPlayer.name}")
     private String name;
-    @Value("${musicPlayer.volume}")
+   @Value("${musicPlayer.volume}")
     private int volume;
-
-    private Music music1;
-    private Music music2;
-    private Music music3;
+    private List<Music> music = new ArrayList<Music>(Arrays.asList(new ClassicalMusic(), new RockMusic(), new PopMusic()));
 
     public String getName() {
         return name;
     }
-
     public int getVolume() {
         return volume;
     }
 
-    @Autowired
-    public MusicPlayer(@Qualifier("classical") Music music1, @Qualifier("rock") Music music2, @Qualifier("pop") Music music3) {
-        this.music1 = music1;
-        this.music2 = music2;
-        this.music3 = music3;
+    public MusicPlayer(List<Music> music) {
+        this.music = music;
     }
 
     public String playMusic() {
-        Music[] arr = {music1, music2, music3}; //returned by Enum.values(), you get the idea
+
         Random random = new Random();
-        int st = random.nextInt(arr.length);
-        Music randElement = arr[st];
+        int st = random.nextInt(music.size());
+        Music randElement = music.get(st);
 
         return "Играет музыка: " + randElement.getSong();
     }
 
-    @PostConstruct //запкчкается при инициализации
+    public List<Music> getMusic() {
+        return music;
+    }
+
+  @PostConstruct //запкчкается при инициализации
     public void doMyInit() {
         System.out.println("Делаю инициализацию бина");
     }
 
-    @PreDestroy
+   @PreDestroy
     public void doMyDestroy() {
         System.out.println("Делаю уничтожение бина");
     }
-
-
 }
